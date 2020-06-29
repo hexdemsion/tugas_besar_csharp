@@ -45,6 +45,7 @@ namespace tugas_besar_csharp
                 koneksi.Open();
                 MySqlDataAdapter adapter = new MySqlDataAdapter(cmd);
                 cmd.ExecuteNonQuery();
+                tabelmhs = new DataTable();
                 adapter.Fill(tabelmhs);
                 koneksi.Close();
                 dataGridView1.DataSource = tabelmhs;
