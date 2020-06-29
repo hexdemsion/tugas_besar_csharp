@@ -27,7 +27,7 @@ namespace tugas_besar_csharp
             builder.Password = "";
             builder.Database = "tugas_besar";
 
-            String connString = builder.ToString();
+            string connString = builder.ToString();
             builder = null;
             MySqlConnection dbConn = new MySqlConnection(connString);
             return dbConn;
@@ -55,28 +55,28 @@ namespace tugas_besar_csharp
 
         private void insert_data(object sender, EventArgs e)
         {
-            String stb = textBox1.Text;
-            String nama = textBox2.Text;
-            String prodi = comboBox4.Text;
-            String agama = comboBox1.Text;
-            String tempat_lahir = textBox4.Text;
-            String tanggal_lahir = dateTimePicker1.Text;
-            String jenis_kelamin = comboBox2.Text;
-            String alamat = textBox5.Text;
-            String kota = textBox6.Text;
-            String provinsi = textBox7.Text;
-            String kode_pos = textBox8.Text;
-            String telepon = textBox9.Text;
-            String handphone = textBox10.Text;
-            String hobi = textBox11.Text;
-            String wali = textBox12.Text;
-            String alamat_wali = textBox13.Text;
-            String telepon_wali = textBox14.Text;
-            String tahun_masuk = comboBox3.Text;
+            string stb = textBox1.Text;
+            string nama = textBox2.Text;
+            string prodi = comboBox4.Text;
+            string agama = comboBox1.Text;
+            string tempat_lahir = textBox4.Text;
+            string tanggal_lahir = dateTimePicker1.Text;
+            string jenis_kelamin = comboBox2.Text;
+            string alamat = textBox5.Text;
+            string kota = textBox6.Text;
+            string provinsi = textBox7.Text;
+            string kode_pos = textBox8.Text;
+            string telepon = textBox9.Text;
+            string handphone = textBox10.Text;
+            string hobi = textBox11.Text;
+            string wali = textBox12.Text;
+            string alamat_wali = textBox13.Text;
+            string telepon_wali = textBox14.Text;
+            string tahun_masuk = comboBox3.Text;
 
             try
             {
-                String query_input =
+                string query_input =
                     "INSERT INTO biodata (stb,nama,prodi,agama,tempat_lahir,tanggal_lahir,jenis_kelamin,alamat,kota,provinsi,kode_pos,telepon,handphone,hobi,wali,alamat_wali,telepon_wali,tahun_masuk) " +
                     "VALUES ('" + stb + "', '" + nama + "', '" + prodi + "', '" + agama + "', '" + tempat_lahir + "', '" + tanggal_lahir +
                     "', '" + jenis_kelamin + "', '" + alamat + "', '" + kota + "', '" + provinsi + "', '" + kode_pos + "', '" + telepon + "', '" + handphone + "', '" + hobi + "', '" + wali + "', '" + alamat_wali + "', '" + telepon_wali + "', '" + tahun_masuk + "') ";
@@ -95,7 +95,33 @@ namespace tugas_besar_csharp
             }
         }
 
+        private void dataGridView1_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+            int row_id = e.RowIndex;
+            int col_id = e.ColumnIndex;
+            string record_id = dataGridView1.Rows[row_id].Cells[0].Value.ToString();
+            string record_name = dataGridView1.Columns[col_id].Name;
+            string dataku = dataGridView1.Rows[row_id].Cells[col_id].Value.ToString();
 
+            /*tinggal ambil id dan nama col nya trus masukin ke query*/
 
+            try
+            {
+                string query_update = "UPDATE biodata SET "+record_name+"='"+dataku+"' WHERE id=" + record_id;
+
+                MySqlConnection koneksi = buat_koneksi();
+                MySqlCommand cmd = new MySqlCommand(query_update, koneksi);
+                koneksi.Open();
+                cmd.ExecuteNonQuery();
+                koneksi.Close();
+                MessageBox.Show("Data berhasil di-ubah");
+                ambil_data();
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Data gagal di-ubah");
+            }
+
+        }
     }
 }
