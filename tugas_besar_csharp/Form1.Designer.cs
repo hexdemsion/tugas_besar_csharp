@@ -414,6 +414,7 @@
             this.textBox15.Name = "textBox15";
             this.textBox15.Size = new System.Drawing.Size(193, 20);
             this.textBox15.TabIndex = 39;
+            this.textBox15.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.cari_data);
             // 
             // button1
             // 

@@ -33,9 +33,9 @@ namespace tugas_besar_csharp
             return dbConn;
         }
 
+        DataTable tabelmhs = new DataTable();
         private void ambil_data()
         {
-            DataTable tabelmhs = new DataTable();
             MySqlConnection koneksi = buat_koneksi();
 
             try
@@ -144,6 +144,16 @@ namespace tugas_besar_csharp
             catch (Exception)
             {
                 MessageBox.Show("Data gagal di-hapus");
+            }
+        }
+
+        private void cari_data(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)13)
+            {
+                DataView dv = tabelmhs.DefaultView;
+                dv.RowFilter = string.Format("nama like '%{0}%'", textBox15.Text);
+                dataGridView1.DataSource = dv.ToTable();
             }
         }
     }
