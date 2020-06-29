@@ -69,6 +69,7 @@
             this.textBox15 = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
             this.comboBox4 = new System.Windows.Forms.ComboBox();
+            this.button2 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
@@ -378,6 +379,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.button2);
             this.groupBox1.Controls.Add(this.textBox15);
             this.groupBox1.Controls.Add(this.label19);
             this.groupBox1.Controls.Add(this.dataGridView1);
@@ -400,7 +402,7 @@
             // label19
             // 
             this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(375, 28);
+            this.label19.Location = new System.Drawing.Point(6, 25);
             this.label19.Name = "label19";
             this.label19.Size = new System.Drawing.Size(49, 13);
             this.label19.TabIndex = 39;
@@ -408,7 +410,7 @@
             // 
             // textBox15
             // 
-            this.textBox15.Location = new System.Drawing.Point(430, 25);
+            this.textBox15.Location = new System.Drawing.Point(61, 22);
             this.textBox15.Name = "textBox15";
             this.textBox15.Size = new System.Drawing.Size(193, 20);
             this.textBox15.TabIndex = 39;
@@ -434,6 +436,16 @@
             this.comboBox4.Name = "comboBox4";
             this.comboBox4.Size = new System.Drawing.Size(193, 21);
             this.comboBox4.TabIndex = 40;
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(548, 20);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(75, 23);
+            this.button2.TabIndex = 40;
+            this.button2.Text = "Hapus";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.hapus_data);
             // 
             // Form1
             // 
@@ -531,6 +543,7 @@
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.ComboBox comboBox4;
+        private System.Windows.Forms.Button button2;
     }
 }
 

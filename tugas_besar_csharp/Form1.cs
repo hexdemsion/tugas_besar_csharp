@@ -37,9 +37,11 @@ namespace tugas_besar_csharp
         {
             DataTable tabelmhs = new DataTable();
             MySqlConnection koneksi = buat_koneksi();
+
             try
             {
-                MySqlCommand cmd = new MySqlCommand("SELECT * FROM biodata", koneksi);
+                string query_read = "SELECT * FROM biodata";
+                MySqlCommand cmd = new MySqlCommand(query_read, koneksi);
                 koneksi.Open();
                 MySqlDataAdapter adapter = new MySqlDataAdapter(cmd);
                 cmd.ExecuteNonQuery();
@@ -76,13 +78,13 @@ namespace tugas_besar_csharp
 
             try
             {
-                string query_input =
+                string query_create =
                     "INSERT INTO biodata (stb,nama,prodi,agama,tempat_lahir,tanggal_lahir,jenis_kelamin,alamat,kota,provinsi,kode_pos,telepon,handphone,hobi,wali,alamat_wali,telepon_wali,tahun_masuk) " +
                     "VALUES ('" + stb + "', '" + nama + "', '" + prodi + "', '" + agama + "', '" + tempat_lahir + "', '" + tanggal_lahir +
                     "', '" + jenis_kelamin + "', '" + alamat + "', '" + kota + "', '" + provinsi + "', '" + kode_pos + "', '" + telepon + "', '" + handphone + "', '" + hobi + "', '" + wali + "', '" + alamat_wali + "', '" + telepon_wali + "', '" + tahun_masuk + "') ";
 
                 MySqlConnection koneksi = buat_koneksi();
-                MySqlCommand cmd = new MySqlCommand(query_input, koneksi);
+                MySqlCommand cmd = new MySqlCommand(query_create, koneksi);
                 koneksi.Open();
                 cmd.ExecuteNonQuery();
                 koneksi.Close();
@@ -103,8 +105,6 @@ namespace tugas_besar_csharp
             string record_name = dataGridView1.Columns[col_id].Name;
             string dataku = dataGridView1.Rows[row_id].Cells[col_id].Value.ToString();
 
-            /*tinggal ambil id dan nama col nya trus masukin ke query*/
-
             try
             {
                 string query_update = "UPDATE biodata SET "+record_name+"='"+dataku+"' WHERE id=" + record_id;
@@ -122,6 +122,29 @@ namespace tugas_besar_csharp
                 MessageBox.Show("Data gagal di-ubah");
             }
 
+        }
+
+        private void hapus_data(object sender, EventArgs e)
+        {
+            int row_id = dataGridView1.SelectedCells[0].RowIndex;
+            string record_id = dataGridView1.Rows[row_id].Cells[0].Value.ToString();
+
+            try
+            {
+                string query_delete = "DELETE FROM biodata WHERE id=" + record_id;
+
+                MySqlConnection koneksi = buat_koneksi();
+                MySqlCommand cmd = new MySqlCommand(query_delete, koneksi);
+                koneksi.Open();
+                cmd.ExecuteNonQuery();
+                koneksi.Close();
+                MessageBox.Show("Data berhasil di-hapus");
+                ambil_data();
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Data gagal di-hapus");
+            }
         }
     }
 }
